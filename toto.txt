@@ -1,0 +1,178 @@
+formation github
+configuration initiale:
+git --global user.email "elisabeth.naja@brest-metropole.fr"
+git --global user.name "Elisabeth Naja"
+
+
+créer un répertoire w:\sig\en
+clic droit dans le répertoire et choisir open Git Bash here
+
+git init
+ls -la : l'équivalent d'un dir list all pour voir les fichiers cachés
+ls : dir
+
+echo "hello" > titi.txt
+git status
+git add titi.txt
+git status
+git commit -m "commit initial"
+>>>   modifier le titi.txt
+
+git add titi.txt
+git status
+git commit -m "Version1"
+
+git log 
+>>> liste les différentes versions
+
+cd ..
+cd EN2
+
+supprimer les fichiers, pour les retrouver :
+git restore .  
+
+
+pour récupérer la version X : reperer la version et copier/coller l'id de la version
+
+git log
+commit f98402f9613d0fc5eb9a8e0fcdba8bc0c2e3ca34 (HEAD -> master)
+Author: Elisabeth Naja <elisabeth.naja@brest-metropole.fr>
+Date:   Mon Dec 11 10:35:52 2023 +0100
+
+    une ligne en plus
+
+commit be14063884004c9266675addb35dd53d1e37389e
+Author: Elisabeth Naja <elisabeth.naja@brest-metropole.fr>
+Date:   Mon Dec 11 10:26:12 2023 +0100
+
+    commit initial
+
+git checkout be14063884004c9266675addb35dd53d1e37389e
+double clic pour selectionner le nom puis clic molette, l'ajoute à la commande 
+saisir be14063 (ça suffit)
+
+
+pour se créer des raccourcis
+git config --global alias.co checkout
+git config --global alias.s status
+git co f98402f
+
+git config --global alias.agp "log --all --graph --pretty=format:'%C(yellow)%h %C(cyan)%ad %C(blue)%an %C(auto)%d %C(reset)%s' --date=format:'%Y-%m-%d %H:%M'"
+git co
+
+git agp
+git co master
+git agp
+
+
+si je modifie le titi.txt
+pour voir la différence par rapport à ce que j'avais:
+git diff
+	diff --git a/titi.txt b/titi.txt
+	index 76e1855..4a613ab 100644
+	--- a/titi.txt
+	+++ b/titi.txt
+	@@ -1,2 +1,3 @@
+	 hello
+	 1 ligne ajoutée
+	+2eme ligne ajoutée
+	\ No newline at end of file
+git diff  be14063 f98402f
+git diff  f98402f be14063 
+git diff --staged
+
+
+working dir --> add --> staging area --> commit --> reposing
+
+pour ingorer 
+touch .gitignore
+> va créer un fichier .gitignore
+ajouter les extensions qu'on ne souhaite pas gérerdans le fichier : ex: 
+*.pdf
+*.docx
+*.log
+la commande "git status" ne va pas les lister 
+
+github.com/gitlab.com/bitbucket.org
+forum, discussions, ...
+
+pour publier:
+git clone : sur github il y a deja un projet et je veux le récupérer
+git fecth : après le git clone, permet de récuperer la mise à jour du projet
+git push : permet de pousser mes maj sur le réseau distant
+
+git clone https://github.com/dupontl/DATUM/
+ne veut pas...ssl certifacte problem...
+
+git config --global http.sslVerify false
+pour pouvoir cloner on peut cloner DATUM...
+
+si on modif le readme attention respecter majuscule/minuscule
+git diff
+git add README.md
+git commit -m "ma version"
+git status 
+si je veux pousser ma version en ligne
+git push
+pas le droit
+
+
+créer un repo en ligne dans https://github.com/ElisabethNaja
+lui donner un nom testNAJA
+retouner en local et indiquer que cette adresse web est le repo en ligne
+maintenant le lien est fait entre le local et le en ligne
+git remote add origin https://github.com/ElisabethNaja/testNAJA.git
+git push : pas de parametre tu prnds ce qui a chez moi et tu le mets sur origin
+la 1re fois il faut la commande complete
+git push -u origin main
+
+
+se créer une clé ssh : 
+ssh-keygen -t ed25519 -C "elisabeth.naja@brest-metropole.fr"
+nom et répertoire par défaut, pas de password
+Enter file in which to save the key (/c/Users/naja/.ssh/id_ed25519):
+clé public, clé privé
+la clé public on peut la mettre sur notre compte github paramètres
+C:\Users\naja\.ssh  : le .pub
+
+
+
+invitation : ajouter des gens "add people"
+et donc on peut pousser
+
+git clone git@github.com:MarcAntoineGe/test.git
+crée un répertoire là ou on est
+cd test
+rentrer dans le répertoire
+git agp
+
+modifier
+git diff
+git add file1.txt
+git add file2.txt
+git commit -m "version naja"
+git push
+git branch -avv : indique qu"on est en avance help 
+on ne fait pas de clone pour récupérer la dernière version mais on fait des fetch
+git fetch
+git agp pour voir la branche
+fetch est sans danger : ça ne va pas ecraser ce qu'on est en train de faire
+
+git rebase : va merger et va annoner les conflits
+>>> voir les modifs et traiter les conflits puis
+git rebase continue ou abort ou skip
+git add file1.txt
+git rebase --continue
+git commit  
+
+git show origin /master
+
+
+git pull : fait le fecth + le rebase : attention dangereux - on peut perdre ses infos
+ne pas faire!!!
+
+git rebase --abort : annule le merge car il y a un conflit
+git rebase --continue : il y a des conflits mais on force (on devra regler les pb ensuite)
+
+
+espace :x
